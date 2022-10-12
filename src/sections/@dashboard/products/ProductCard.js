@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-import { Link as RouterLink } from 'react-router-dom';
+import { useState } from 'react';
+import { Link as RouterLink, useNavigate, useLocation } from 'react-router-dom';
 // material
 import { Box, Card, Link, Typography, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -27,10 +28,17 @@ ShopProductCard.propTypes = {
 
 export default function ShopProductCard({ product }) {
   const { name, cover, price, colors, status, priceSale } = product;
-
+  const [currentPath, setCurrentPath] = useState();
+  console.log('_____________', currentPath);
+  const navigate = useNavigate();
+  const routeChange = () => {
+    const path = '/dashboard/products/demo';
+    console.log('_____________', currentPath, path);
+    navigate(path);
+  };
   return (
     <Card>
-      <Box sx={{ pt: '100%', position: 'relative' }}>
+      <Box sx={{ pt: '100%', position: 'relative' }} onClick={routeChange}>
         {status && (
           <Label
             variant="filled"
